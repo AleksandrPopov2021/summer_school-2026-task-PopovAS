@@ -1,4 +1,7 @@
-```
-# Project documentation
-01-analysis/2-requirements/README.md
+# Examples 1 and 2 demonstrate that only source/config files (.md) are present
+# No build artifacts, dependencies, or temp files detected in changes
+# Therefore, no ignores are needed
+
+```gitignore
+
 ```
