@@ -1,0 +1,189 @@
+{
+  "section": "7",
+  "title": "Нефункциональные требования (NFR)",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "NFR-001-T01",
+      "requirement": "NFR-001",
+      "name": "Mobile-first: навигация tabs доступна одной рукой",
+      "testType": "manual",
+      "status": "manual",
+      "checklist": ["Bottom nav: Расписание | Мои записи | Профиль", "Основные действия без горизонтального скролла"]
+    },
+    {
+      "id": "NFR-001-T02",
+      "requirement": "NFR-001",
+      "name": "UX review всех SCR MVP на Android",
+      "testType": "manual",
+      "status": "manual",
+      "related": ["SCR-001", "SCR-003", "SCR-005", "SCR-006", "SCR-010"]
+    },
+    {
+      "id": "NFR-001-T03",
+      "requirement": "NFR-001",
+      "name": "iOS UI smoke",
+      "testType": "component",
+      "status": "planned",
+      "priority": "medium"
+    },
+    {
+      "id": "NFR-002-T01",
+      "requirement": "NFR-002",
+      "name": "Client отображает free_spots из API без локального пересчёта",
+      "testType": "integration",
+      "status": "partial",
+      "automatedTest": "client/.../SlotAvailabilityTest.kt (flags from API)"
+    },
+    {
+      "id": "NFR-002-T02",
+      "requirement": "NFR-002",
+      "name": "E2E staging: актуальность после 409 conflict",
+      "testType": "e2e",
+      "status": "planned",
+      "related": ["FR-014"]
+    },
+    {
+      "id": "NFR-003-T01",
+      "requirement": "NFR-003",
+      "name": "Backend ErrorResponse codes и messages",
+      "testType": "unit",
+      "status": "done",
+      "automatedTest": "backend/.../errors_test.go"
+    },
+    {
+      "id": "NFR-003-T02",
+      "requirement": "NFR-003",
+      "name": "Client maps API errors to user-facing messages",
+      "testType": "unit",
+      "status": "done",
+      "automatedTest": "client/.../CreateBookingConflictTest.kt; MvpUseCasesTest.kt"
+    },
+    {
+      "id": "NFR-003-T03",
+      "requirement": "NFR-003",
+      "name": "Manual: тексты ошибок на русском в UI",
+      "testType": "manual",
+      "status": "manual",
+      "checklist": ["NO_FREE_SPOTS", "CANCELLATION_FORBIDDEN", "INSTRUCTOR_CLEARANCE_REQUIRED", "CLIENT_ALREADY_EXISTS"]
+    },
+    {
+      "id": "NFR-004-T01",
+      "requirement": "NFR-004",
+      "name": "API rejects disable reminders_enabled",
+      "testType": "unit",
+      "status": "done",
+      "automatedTest": "backend/.../client_test.go::TestValidateNotificationPreferencesUpdate"
+    },
+    {
+      "id": "NFR-004-T02",
+      "requirement": "NFR-004",
+      "name": "API rejects disable gym_cancellation_enabled",
+      "testType": "unit",
+      "status": "done",
+      "automatedTest": "backend/.../client_test.go::TestValidateNotificationPreferencesUpdate"
+    },
+    {
+      "id": "NFR-004-T03",
+      "requirement": "NFR-004",
+      "name": "Push gym cancel always sent regardless of prefs",
+      "testType": "unit",
+      "status": "done",
+      "automatedTest": "backend/.../push/service_test.go::TestNotifyGymCancellation_AlwaysSends"
+    },
+    {
+      "id": "NFR-005-T01",
+      "requirement": "NFR-005",
+      "name": "All UI strings in Russian resources",
+      "testType": "manual",
+      "status": "manual",
+      "checklist": ["Нет английских fallback на экранах MVP", "Формат даты/времени RU locale"]
+    },
+    {
+      "id": "NFR-005-T02",
+      "requirement": "NFR-005",
+      "name": "Snapshot test Russian strings (optional)",
+      "testType": "component",
+      "status": "planned"
+    },
+    {
+      "id": "NFR-006-T01",
+      "requirement": "NFR-006",
+      "name": "Loyalty threshold N from system_config",
+      "testType": "unit",
+      "status": "done",
+      "automatedTest": "backend/.../worker/service_test.go::TestCompleteBookings_UsesLoyaltyThreshold"
+    },
+    {
+      "id": "NFR-006-T02",
+      "requirement": "NFR-006",
+      "name": "Sanctions threshold blocks booking",
+      "testType": "integration",
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateBookingForbiddenBySanctionsIntegration"
+    },
+    {
+      "id": "NFR-006-T03",
+      "requirement": "NFR-006",
+      "name": "Cutoff/cancel windows from config",
+      "testType": "unit",
+      "status": "done",
+      "automatedTest": "backend/internal/domain/slot_test.go; cancellation_test.go"
+    },
+    {
+      "id": "NFR-007-T01",
+      "requirement": "NFR-007",
+      "name": "Cold start → schedule visible < 3s",
+      "testType": "performance",
+      "status": "planned",
+      "kpi": "≤ 3000 ms on mid-range Android"
+    },
+    {
+      "id": "NFR-007-T02",
+      "requirement": "NFR-007",
+      "name": "GET /slots response time baseline",
+      "testType": "performance",
+      "status": "planned"
+    },
+    {
+      "id": "NFR-008-T01",
+      "requirement": "NFR-008",
+      "name": "MVP contract paths registered",
+      "testType": "contract",
+      "status": "done",
+      "automatedTest": "backend/.../contract_helpers_test.go::TestMVPContractPathsRegistered"
+    },
+    {
+      "id": "NFR-008-T02",
+      "requirement": "NFR-008",
+      "name": "MVP contract integration smoke",
+      "testType": "contract",
+      "status": "partial",
+      "automatedTest": "backend/.../contract_test.go::TestMVPContractIntegration"
+    },
+    {
+      "id": "NFR-008-T03",
+      "requirement": "NFR-008",
+      "name": "Full OpenAPI response schema validation",
+      "testType": "contract",
+      "status": "planned",
+      "priority": "medium"
+    },
+    {
+      "id": "NFR-009-T01",
+      "requirement": "NFR-009",
+      "name": "409 conflict handling end-to-end",
+      "testType": "integration",
+      "status": "done",
+      "automatedTest": "backend/.../booking_integration_test.go; client/.../CreateBookingConflictTest.kt"
+    },
+    {
+      "id": "NFR-009-T02",
+      "requirement": "NFR-009",
+      "name": "422/403 error codes mapped correctly",
+      "testType": "integration",
+      "status": "done",
+      "automatedTest": "backend/.../booking_integration_test.go"
+    }
+  ]
+}

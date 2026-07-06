@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "date": "2026-07-05",
+  "project": "Скалодром «Вертикаль»",
+  "source": "test-coverage-plan.md",
+  "statusLegend": {
+    "done": "Автотест реализован и проходит",
+    "partial": "Частичное покрытие",
+    "planned": "Запланирован, автотеста нет",
+    "manual": "Ручное / exploratory-тестирование",
+    "out_of_scope": "Post-MVP или вне scope"
+  },
+  "sections": [
+    {
+      "id": "1",
+      "title": "Пирамида тестирования",
+      "file": "tests-01-pyramid.json"
+    },
+    {
+      "id": "2",
+      "title": "Покрытие по доменам приложения",
+      "file": "tests-02-domains.json"
+    },
+    {
+      "id": "3",
+      "title": "Функциональные требования (FR)",
+      "file": "tests-03-fr.json"
+    },
+    {
+      "id": "4",
+      "title": "Use Cases (UC)",
+      "file": "tests-04-uc.json"
+    },
+    {
+      "id": "5",
+      "title": "API (OpenAPI operationId)",
+      "file": "tests-05-api.json"
+    },
+    {
+      "id": "6",
+      "title": "Клиентские логики (LOGIC)",
+      "file": "tests-06-logic.json"
+    },
+    {
+      "id": "7",
+      "title": "Нефункциональные требования (NFR)",
+      "file": "tests-07-nfr.json"
+    },
+    {
+      "id": "8",
+      "title": "CI/CD и окружения",
+      "file": "tests-08-ci.json"
+    },
+    {
+      "id": "9",
+      "title": "Backlog автоматизации",
+      "file": "tests-09-backlog.json"
+    },
+    {
+      "id": "10",
+      "title": "Ручное exploratory-тестирование",
+      "file": "tests-10-manual.json"
+    }
+  ]
+}

@@ -1,0 +1,331 @@
+{
+  "section": "1",
+  "title": "Пирамида тестирования",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "PYR-UNIT-BE-001",
+      "name": "Domain: валидация телефона E.164",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "backend/internal/domain/client_test.go::TestValidatePhone"
+    },
+    {
+      "id": "PYR-UNIT-BE-002",
+      "name": "Domain: политика отмены (none / late / forbidden)",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "backend/internal/domain/cancellation_test.go"
+    },
+    {
+      "id": "PYR-UNIT-BE-003",
+      "name": "Domain: доступность слота (места, cutoff, допуск, cancelled)",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "backend/internal/domain/slot_test.go"
+    },
+    {
+      "id": "PYR-UNIT-BE-004",
+      "name": "Domain: расчёт стоимости и скидка лояльности",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "backend/internal/domain/pricing_test.go"
+    },
+    {
+      "id": "PYR-UNIT-BE-005",
+      "name": "Domain: статус лояльности по порогу N",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "medium",
+      "automatedTest": "backend/internal/domain/loyalty_test.go"
+    },
+    {
+      "id": "PYR-UNIT-BE-006",
+      "name": "Domain: окно оценки и валидация звёзд",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "low",
+      "automatedTest": "backend/internal/domain/rating_test.go"
+    },
+    {
+      "id": "PYR-UNIT-BE-007",
+      "name": "Application: push-сервис (booking created, gym cancel, rating invite)",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "high",
+      "automatedTest": "backend/internal/application/push/service_test.go"
+    },
+    {
+      "id": "PYR-UNIT-BE-008",
+      "name": "Application: worker — завершение записей и лояльность",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "medium",
+      "automatedTest": "backend/internal/application/worker/service_test.go"
+    },
+    {
+      "id": "PYR-UNIT-BE-009",
+      "name": "Auth: JWT roundtrip и invalid token",
+      "level": "unit",
+      "target": "backend",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "backend/internal/adapters/auth/jwt_test.go"
+    },
+    {
+      "id": "PYR-UNIT-CL-001",
+      "name": "Client domain: CheckSession (valid / invalid / offline)",
+      "level": "unit",
+      "target": "client-shared",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "client/shared/src/commonTest/.../CheckSessionUseCaseTest.kt"
+    },
+    {
+      "id": "PYR-UNIT-CL-002",
+      "name": "Client domain: RegistrationValidator",
+      "level": "unit",
+      "target": "client-shared",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "client/shared/src/commonTest/.../RegistrationValidatorTest.kt"
+    },
+    {
+      "id": "PYR-UNIT-CL-003",
+      "name": "Client domain: SlotAvailability, BookingCancellation, Pricing, Rating",
+      "level": "unit",
+      "target": "client-shared",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "client/shared/src/commonTest/kotlin/ru/vertical/climbing/domain/"
+    },
+    {
+      "id": "PYR-UNIT-CL-004",
+      "name": "Client presentation: ScheduleAsyncMapping",
+      "level": "unit",
+      "target": "client-shared",
+      "status": "done",
+      "priority": "high",
+      "automatedTest": "client/shared/src/commonTest/.../ScheduleAsyncMappingTest.kt"
+    },
+    {
+      "id": "PYR-INT-BE-001",
+      "name": "HTTP: client flow register → me → consent",
+      "level": "integration",
+      "target": "backend",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "backend/internal/adapters/http/client_integration_test.go::TestClientFlowIntegration"
+    },
+    {
+      "id": "PYR-INT-BE-002",
+      "name": "HTTP: slots list / detail / clearances",
+      "level": "integration",
+      "target": "backend",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "backend/internal/adapters/http/slot_integration_test.go"
+    },
+    {
+      "id": "PYR-INT-BE-003",
+      "name": "HTTP: booking create / cancel / rental / alternatives / gym cancel",
+      "level": "integration",
+      "target": "backend",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "backend/internal/adapters/http/booking_integration_test.go"
+    },
+    {
+      "id": "PYR-INT-BE-004",
+      "name": "HTTP: push token registration",
+      "level": "integration",
+      "target": "backend",
+      "status": "done",
+      "priority": "high",
+      "automatedTest": "backend/internal/adapters/http/push_integration_test.go"
+    },
+    {
+      "id": "PYR-INT-BE-005",
+      "name": "HTTP: instructor rating",
+      "level": "integration",
+      "target": "backend",
+      "status": "done",
+      "priority": "low",
+      "automatedTest": "backend/internal/adapters/http/rating_integration_test.go"
+    },
+    {
+      "id": "PYR-INT-CL-001",
+      "name": "Client data: AuthRepository (register, token)",
+      "level": "integration",
+      "target": "client-shared",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "client/shared/src/commonTest/.../AuthRepositoryTest.kt"
+    },
+    {
+      "id": "PYR-INT-CL-002",
+      "name": "Client data: CreateBookingConflict (409 mapping)",
+      "level": "integration",
+      "target": "client-shared",
+      "status": "done",
+      "priority": "critical",
+      "automatedTest": "client/shared/src/commonTest/.../CreateBookingConflictTest.kt"
+    },
+    {
+      "id": "PYR-INT-CL-003",
+      "name": "Client data: UpdateBookingRental",
+      "level": "integration",
+      "target": "client-shared",
+      "status": "done",
+      "priority": "medium",
+      "automatedTest": "client/shared/src/commonTest/.../UpdateBookingRentalIntegrationTest.kt"
+    },
+    {
+      "id": "PYR-INT-CL-004",
+      "name": "Client data: notification preferences repository",
+      "level": "integration",
+      "target": "client-shared",
+      "status": "planned",
+      "priority": "high",
+      "related": ["LOGIC-011", "FR-032"]
+    },
+    {
+      "id": "PYR-CNT-BE-001",
+      "name": "Contract: MVP paths registered",
+      "level": "contract",
+      "target": "backend",
+      "status": "done",
+      "priority": "high",
+      "automatedTest": "backend/internal/adapters/http/contract_helpers_test.go::TestMVPContractPathsRegistered"
+    },
+    {
+      "id": "PYR-CNT-BE-002",
+      "name": "Contract: MVP integration smoke",
+      "level": "contract",
+      "target": "backend",
+      "status": "partial",
+      "priority": "high",
+      "automatedTest": "backend/internal/adapters/http/contract_test.go::TestMVPContractIntegration"
+    },
+    {
+      "id": "PYR-CNT-BE-003",
+      "name": "Contract: полное покрытие response schemas OpenAPI",
+      "level": "contract",
+      "target": "backend",
+      "status": "planned",
+      "priority": "medium",
+      "related": ["NFR-008"]
+    },
+    {
+      "id": "PYR-CNT-CL-001",
+      "name": "Contract: client DTO соответствуют OpenAPI",
+      "level": "contract",
+      "target": "client-shared",
+      "status": "planned",
+      "priority": "medium",
+      "related": ["NFR-008"]
+    },
+    {
+      "id": "PYR-UI-CL-001",
+      "name": "Android Compose: smoke register → book → cancel",
+      "level": "component",
+      "target": "client-ui",
+      "status": "partial",
+      "priority": "high",
+      "automatedTest": "client/composeApp/src/androidInstrumentedTest/.../MvpFlowTest.kt::register_book_and_cancel"
+    },
+    {
+      "id": "PYR-UI-CL-002",
+      "name": "Android Compose: empty state SCR-013",
+      "level": "component",
+      "target": "client-ui",
+      "status": "planned",
+      "priority": "medium",
+      "related": ["SCR-013", "FR-005"]
+    },
+    {
+      "id": "PYR-UI-CL-003",
+      "name": "Android Compose: my bookings list states SCR-006",
+      "level": "component",
+      "target": "client-ui",
+      "status": "planned",
+      "priority": "medium",
+      "related": ["SCR-006", "FR-016"]
+    },
+    {
+      "id": "PYR-UI-CL-004",
+      "name": "iOS UI smoke",
+      "level": "component",
+      "target": "client-ui",
+      "status": "planned",
+      "priority": "medium",
+      "related": ["NFR-001"]
+    },
+    {
+      "id": "PYR-E2E-001",
+      "name": "E2E mock API: полный MVP flow на Android",
+      "level": "e2e",
+      "target": "client-ui",
+      "status": "partial",
+      "priority": "high",
+      "automatedTest": "client/composeApp/.../MvpFlowTest.kt"
+    },
+    {
+      "id": "PYR-E2E-002",
+      "name": "E2E staging: client → real backend (register → book → cancel)",
+      "level": "e2e",
+      "target": "e2e",
+      "status": "planned",
+      "priority": "high",
+      "related": ["UC-002", "UC-003", "NFR-002"]
+    },
+    {
+      "id": "PYR-NF-BE-001",
+      "name": "Load: 50 concurrent bookings на последнее место",
+      "level": "non_functional",
+      "target": "backend",
+      "status": "done",
+      "priority": "low",
+      "automatedTest": "backend/.../booking_integration_test.go::TestCreateBookingFiftyConcurrentLastSpotIntegration"
+    },
+    {
+      "id": "PYR-NF-CL-001",
+      "name": "Offline: cold start с кэшем config/slots",
+      "level": "non_functional",
+      "target": "client-shared",
+      "status": "partial",
+      "priority": "medium",
+      "automatedTest": "client/.../CheckSessionUseCaseTest.kt (offline branch)"
+    },
+    {
+      "id": "PYR-NF-CL-002",
+      "name": "Performance: cold start → schedule < 3s",
+      "level": "non_functional",
+      "target": "client-ui",
+      "status": "planned",
+      "priority": "medium",
+      "related": ["NFR-007"]
+    },
+    {
+      "id": "PYR-NF-CL-003",
+      "name": "Localization: все строки UI на русском",
+      "level": "non_functional",
+      "target": "client-ui",
+      "status": "manual",
+      "priority": "high",
+      "related": ["NFR-005"]
+    }
+  ]
+}

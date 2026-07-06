@@ -1,0 +1,216 @@
+{
+  "section": "10",
+  "title": "Ручное exploratory-тестирование",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "MAN-SMOKE-001",
+      "session": "Smoke",
+      "name": "Happy path: регистрация → расписание → запись → отмена",
+      "environment": "staging",
+      "focus": "Happy path на staging",
+      "related": ["UC-006", "UC-001", "UC-002", "UC-003"],
+      "steps": [
+        "Установить staging build клиента",
+        "Запустить приложение — пройти регистрацию (новый телефон)",
+        "Открыть расписание, выбрать дату со слотами",
+        "Записаться на болдеринг-слот с прокатом туфель",
+        "Подтвердить согласие на риск (если первый раз)",
+        "Проверить запись в «Мои записи»",
+        "Отменить запись (> 2 ч до начала)",
+        "Убедиться, что слот снова показывает свободное место"
+      ],
+      "expectedResult": "Все шаги без ошибок; UI на русском; статусы корректны",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-SMOKE-002",
+      "session": "Smoke",
+      "name": "Повторный запуск с сохранённой сессией",
+      "environment": "staging",
+      "related": ["LOGIC-001", "UC-006"],
+      "steps": [
+        "После успешной регистрации закрыть приложение",
+        "Перезапустить — должен открыться экран расписания без повторной регистрации"
+      ],
+      "expectedResult": "Splash → Schedule (< 5 сек)",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-OFFLINE-001",
+      "session": "Offline",
+      "name": "Cold start без сети с кэшем config",
+      "environment": "any",
+      "related": ["LOGIC-001", "LOGIC-003"],
+      "steps": [
+        "Один раз запустить приложение online — дождаться расписания",
+        "Включить airplane mode",
+        "Force-stop и перезапустить приложение",
+        "Проверить баннер «нет сети» и отображение кэшированного расписания"
+      ],
+      "expectedResult": "Приложение не падает; кэш виден; действия, требующие API, показывают ошибку",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-OFFLINE-002",
+      "session": "Offline",
+      "name": "Первая установка offline — нет cached_config",
+      "environment": "any",
+      "related": ["LOGIC-001"],
+      "steps": [
+        "Чистая установка, airplane mode до первого запуска",
+        "Запустить приложение"
+      ],
+      "expectedResult": "Понятное сообщение об ошибке / ожидание сети",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-PUSH-001",
+      "session": "Push",
+      "name": "Push подтверждения записи → deep link",
+      "environment": "staging + real device",
+      "related": ["SCR-014", "FR-015", "LOGIC-013"],
+      "steps": [
+        "Зарегистрировать push-токен на реальном устройстве",
+        "Создать запись (booking_confirmation enabled)",
+        "Получить push «Запись подтверждена»",
+        "Tap по уведомлению"
+      ],
+      "expectedResult": "Открывается SCR-007 booking detail или SCR-006",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-PUSH-002",
+      "session": "Push",
+      "name": "Push отмены скалодромом (обязательный)",
+      "environment": "staging + real device",
+      "related": ["FR-020", "UC-004", "SCR-014"],
+      "steps": [
+        "Создать запись на слот",
+        "Через internal API отменить слот скалодромом",
+        "Получить push об отмене",
+        "Tap → проверить причину отмены и предложение альтернативы"
+      ],
+      "expectedResult": "Push доставлен даже при отключённых optional prefs; SCR-009 или сообщение «альтернатив нет»",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-PUSH-003",
+      "session": "Push",
+      "name": "Push-напоминания за сутки и за N часов",
+      "environment": "staging",
+      "related": ["FR-024", "FR-025", "UC-005"],
+      "steps": [
+        "Создать запись с starts_at через 24h+ (или изменить seed/clock на staging)",
+        "Дождаться worker reminder",
+        "Проверить push и deep link на booking detail"
+      ],
+      "expectedResult": "Напоминания приходят; не отключаются в настройках",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-A11Y-001",
+      "session": "Accessibility",
+      "name": "TalkBack: навигация по основным экранам",
+      "environment": "Android device",
+      "related": ["NFR-001"],
+      "steps": [
+        "Включить TalkBack",
+        "Пройти регистрацию — все поля озвучиваются",
+        "Расписание: слоты читаются с временем и свободными местами",
+        "Кнопки «Записаться», «Отменить» имеют contentDescription"
+      ],
+      "expectedResult": "Все интерактивные элементы доступны для screen reader",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-A11Y-002",
+      "session": "Accessibility",
+      "name": "Контраст и масштаб шрифта",
+      "environment": "Android/iOS",
+      "related": ["NFR-001"],
+      "steps": [
+        "Увеличить системный шрифт до maximum",
+        "Проверить SCR-003, SCR-005, SCR-006 на обрезание текста",
+        "Проверить контраст primary кнопок на тёмной/светлой теме"
+      ],
+      "expectedResult": "UI не ломается; текст читаем",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-REG-001",
+      "session": "Regression",
+      "name": "Gym cancel → alternative slot offer",
+      "environment": "staging",
+      "related": ["UC-004", "FR-022", "SCR-009"],
+      "steps": [
+        "Записаться на слот A",
+        "Отменить слот A скалодромом (internal API)",
+        "Открыть push / booking detail",
+        "Проверить SCR-009 с альтернативным слотом B (та же зона, инструктор, прокат)",
+        "Записаться на слот B"
+      ],
+      "expectedResult": "Alternative found → переход к записи; rebooking на A запрещён",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-REG-002",
+      "session": "Regression",
+      "name": "Gym cancel → alternative not found",
+      "environment": "staging",
+      "related": ["FR-022", "SCR-009"],
+      "steps": [
+        "Записаться на уникальный слот без аналогов",
+        "Gym cancel",
+        "Проверить сообщение об отсутствии альтернатив"
+      ],
+      "expectedResult": "found=false обрабатывается корректно; refund status если paid",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-REG-003",
+      "session": "Regression",
+      "name": "Late cancellation warning (1–2 часа)",
+      "environment": "staging or seed",
+      "related": ["FR-018", "UC-003", "SCR-008"],
+      "steps": [
+        "Создать/найти запись с starts_at через 90 минут",
+        "Инициировать отмену",
+        "Проверить предупреждение late cancellation",
+        "Подтвердить отмену"
+      ],
+      "expectedResult": "Предупреждение показано; отмена успешна; late_cancellation_count++",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-REG-004",
+      "session": "Regression",
+      "name": "Настройки уведомлений: mandatory vs optional",
+      "environment": "staging",
+      "related": ["FR-032", "UC-011", "SCR-011", "NFR-004"],
+      "steps": [
+        "Открыть SCR-011",
+        "Попытаться отключить напоминания — должно быть невозможно",
+        "Отключить «подтверждение записи» — успех",
+        "Создать запись — push confirmation не приходит",
+        "Gym cancel — push всё равно приходит"
+      ],
+      "expectedResult": "Mandatory push не отключаются; optional — отключаются",
+      "status": "manual"
+    },
+    {
+      "id": "MAN-REG-005",
+      "session": "Regression",
+      "name": "Rope slot без допуска — блокировка записи",
+      "environment": "staging",
+      "related": ["FR-009", "UC-002"],
+      "steps": [
+        "Клиент без clearance на rope_routes",
+        "Открыть слот «трассы с верёвкой»",
+        "Проверить заблокированную кнопку записи и сообщение"
+      ],
+      "expectedResult": "can_book=false; понятное сообщение на русском",
+      "status": "manual"
+    }
+  ]
+}

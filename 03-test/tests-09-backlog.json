@@ -1,0 +1,128 @@
+{
+  "section": "9",
+  "title": "Backlog автоматизации",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "BL-001",
+      "priority": "high",
+      "name": "Client CI: unit-тесты shared на каждый PR",
+      "level": "ci",
+      "related": ["LOGIC-001", "LOGIC-002", "LOGIC-003", "LOGIC-004", "LOGIC-005", "LOGIC-006", "LOGIC-007", "LOGIC-008", "LOGIC-009", "LOGIC-013", "LOGIC-014"],
+      "acceptanceCriteria": [
+        "Workflow client-ci.yml на push/pull_request client/**",
+        "Job :shared:allTests проходит на Ubuntu",
+        "PR блокируется при падении тестов"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "BL-002",
+      "priority": "high",
+      "name": "Integration: PATCH notification-preferences",
+      "level": "integration",
+      "related": ["FR-032", "LOGIC-011", "UC-011"],
+      "acceptanceCriteria": [
+        "HTTP test: disable booking_confirmation → 200",
+        "HTTP test: disable reminders_enabled → 400",
+        "HTTP test: disable gym_cancellation_enabled → 400"
+      ],
+      "status": "planned",
+      "targetFile": "backend/internal/adapters/http/notification_integration_test.go"
+    },
+    {
+      "id": "BL-003",
+      "priority": "high",
+      "name": "E2E staging: register → book → cancel (real API)",
+      "level": "e2e",
+      "related": ["UC-002", "UC-003", "NFR-002"],
+      "acceptanceCriteria": [
+        "Client подключён к staging backend",
+        "Новый клиент регистрируется и создаёт запись",
+        "Запись отменяется успешно",
+        "Артефакт: скрипт или instrumented test с BUILD_TYPE=staging"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "BL-004",
+      "priority": "medium",
+      "name": "UI: SCR-013 empty state, SCR-006 list states",
+      "level": "component",
+      "related": ["FR-005", "FR-016", "SCR-013", "SCR-006"],
+      "acceptanceCriteria": [
+        "Compose test: empty schedule shows «Пока нет доступных тренировок»",
+        "Compose test: bookings tab loading / empty / error states"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "BL-005",
+      "priority": "medium",
+      "name": "Worker: напоминания FR-024/025 (timing mocks)",
+      "level": "integration",
+      "related": ["FR-024", "FR-025", "UC-005"],
+      "acceptanceCriteria": [
+        "Mock clock: booking starts in 24h → day-before reminder queued",
+        "Mock clock: booking starts in N hours → same-day reminder queued",
+        "Disabled booking_confirmation does not affect reminders"
+      ],
+      "status": "planned",
+      "targetFile": "backend/internal/application/worker/reminder_test.go"
+    },
+    {
+      "id": "BL-006",
+      "priority": "medium",
+      "name": "Contract: полное покрытие OpenAPI responses",
+      "level": "contract",
+      "related": ["NFR-008"],
+      "acceptanceCriteria": [
+        "Каждый operationId имеет integration test happy path",
+        "Response body валидируется по JSON Schema из openapi.yaml",
+        "Все documented error codes покрыты"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "BL-007",
+      "priority": "medium",
+      "name": "iOS UI smoke (XCTest / KMP UI)",
+      "level": "component",
+      "related": ["NFR-001"],
+      "acceptanceCriteria": [
+        "Smoke: launch → register or schedule visible",
+        "Tabs navigation works on iOS simulator"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "BL-008",
+      "priority": "low",
+      "name": "Performance: 50+ concurrent bookings baseline в CI",
+      "level": "non_functional",
+      "related": ["FR-013"],
+      "acceptanceCriteria": [
+        "TestCreateBookingFiftyConcurrentLastSpotIntegration runs in CI",
+        "Exactly 1 success, 49 conflicts (or documented ratio)",
+        "Optional: record duration threshold"
+      ],
+      "status": "partial",
+      "automatedTest": "backend/.../TestCreateBookingFiftyConcurrentLastSpotIntegration",
+      "notes": "Test exists; add explicit CI assertion / benchmark"
+    },
+    {
+      "id": "BL-009",
+      "priority": "low",
+      "name": "Post-MVP: SCR-012 rating flow UI",
+      "level": "component",
+      "related": ["FR-029", "FR-030", "FR-031", "LOGIC-014"],
+      "acceptanceCriteria": [
+        "Compose test: open rating from push deep link",
+        "Submit 1–5 stars → success",
+        "Gym-cancelled booking hides rating entry"
+      ],
+      "status": "planned",
+      "notes": "Post-MVP"
+    }
+  ]
+}

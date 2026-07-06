@@ -1,0 +1,320 @@
+{
+  "section": "5",
+  "title": "API (OpenAPI operationId)",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "API-registerClient-001",
+      "group": "Clients",
+      "operationId": "registerClient",
+      "method": "POST",
+      "path": "/clients",
+      "scenarios": [
+        { "name": "201 Created + access_token + Client", "status": "done", "automatedTest": "backend/.../TestClientFlowIntegration" },
+        { "name": "400 invalid phone", "status": "done", "automatedTest": "backend/internal/domain/client_test.go::TestValidatePhone" },
+        { "name": "409 CLIENT_ALREADY_EXISTS", "status": "partial", "automatedTest": "client/.../MvpUseCasesTest.kt" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-getCurrentClient-001",
+      "group": "Clients",
+      "operationId": "getCurrentClient",
+      "method": "GET",
+      "path": "/clients/me",
+      "scenarios": [
+        { "name": "200 with Bearer token", "status": "done", "automatedTest": "backend/.../TestClientFlowIntegration" },
+        { "name": "401 without token", "status": "done", "automatedTest": "backend/.../auth_test.go::TestBearerAuthMiddleware" }
+      ],
+      "unitDomain": { "status": "na" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-updateCurrentClient-001",
+      "group": "Clients",
+      "operationId": "updateCurrentClient",
+      "method": "PATCH",
+      "path": "/clients/me",
+      "scenarios": [
+        { "name": "200 risk_consent_accepted=true", "status": "done", "automatedTest": "backend/.../TestClientFlowIntegration" },
+        { "name": "400 invalid consent update", "status": "done", "automatedTest": "backend/.../client_test.go::TestValidateRiskConsentUpdate" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-getClientClearances-001",
+      "group": "Clearances",
+      "operationId": "getClientClearances",
+      "method": "GET",
+      "path": "/clients/me/clearances",
+      "scenarios": [
+        { "name": "200 list of clearances", "status": "done", "automatedTest": "backend/.../TestClientClearancesIntegration" },
+        { "name": "401 unauthorized", "status": "done", "automatedTest": "backend/.../auth_test.go" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-getNotificationPreferences-001",
+      "group": "NotificationPreferences",
+      "operationId": "getNotificationPreferences",
+      "method": "GET",
+      "path": "/clients/me/notification-preferences",
+      "scenarios": [
+        { "name": "200 default prefs after register", "status": "partial", "automatedTest": "backend/.../TestClientFlowIntegration" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "partial" },
+      "contract": { "status": "partial" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "API-updateNotificationPreferences-001",
+      "group": "NotificationPreferences",
+      "operationId": "updateNotificationPreferences",
+      "method": "PATCH",
+      "path": "/clients/me/notification-preferences",
+      "scenarios": [
+        { "name": "200 disable booking_confirmation", "status": "planned" },
+        { "name": "400 reject reminders_enabled=false", "status": "partial", "automatedTest": "backend/.../client_test.go::TestValidateNotificationPreferencesUpdate" },
+        { "name": "400 reject gym_cancellation_enabled=false", "status": "partial", "automatedTest": "backend/.../client_test.go::TestValidateNotificationPreferencesUpdate" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "planned" },
+      "contract": { "status": "partial" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "API-listSlots-001",
+      "group": "Slots",
+      "operationId": "listSlots",
+      "method": "GET",
+      "path": "/slots",
+      "scenarios": [
+        { "name": "200 default 7-day period", "status": "done", "automatedTest": "backend/.../TestListSlotsIntegration" },
+        { "name": "200 filter by date", "status": "done", "automatedTest": "backend/.../TestListSlotsIntegration" },
+        { "name": "200 includes cancelled_by_gym", "status": "done", "automatedTest": "backend/.../slot_test.go" },
+        { "name": "availability reflects clearance when auth", "status": "done", "automatedTest": "backend/.../TestListSlotsWithAuthReflectsClearance" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-getSlot-001",
+      "group": "Slots",
+      "operationId": "getSlot",
+      "method": "GET",
+      "path": "/slots/{slotId}",
+      "scenarios": [
+        { "name": "200 TrainingSlotDetail + rental_availability", "status": "done", "automatedTest": "backend/.../TestGetSlotDetailIntegration" },
+        { "name": "404 unknown slot", "status": "partial" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-findAlternativeSlot-001",
+      "group": "Slots",
+      "operationId": "findAlternativeSlot",
+      "method": "GET",
+      "path": "/slots/alternatives",
+      "scenarios": [
+        { "name": "200 found=true + slot", "status": "done", "automatedTest": "backend/.../TestFindAlternativeSlotFoundIntegration" },
+        { "name": "200 found=false", "status": "done", "automatedTest": "backend/.../TestFindAlternativeSlotNotFoundIntegration" },
+        { "name": "401 unauthorized", "status": "partial" },
+        { "name": "404 invalid booking/slot", "status": "partial" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-getSlotRentalAvailability-001",
+      "group": "Slots",
+      "operationId": "getSlotRentalAvailability",
+      "method": "GET",
+      "path": "/slots/{slotId}/rental-availability",
+      "scenarios": [
+        { "name": "200 rental stock per equipment type", "status": "done", "automatedTest": "backend/.../TestGetSlotDetailIntegration" },
+        { "name": "401 without JWT", "status": "partial" }
+      ],
+      "unitDomain": { "status": "na" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-listBookings-001",
+      "group": "Bookings",
+      "operationId": "listBookings",
+      "method": "GET",
+      "path": "/bookings",
+      "scenarios": [
+        { "name": "200 default status=booked", "status": "done", "automatedTest": "backend/.../TestListBookingsIntegration" },
+        { "name": "401 unauthorized", "status": "partial" }
+      ],
+      "unitDomain": { "status": "na" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-createBooking-001",
+      "group": "Bookings",
+      "operationId": "createBooking",
+      "method": "POST",
+      "path": "/bookings",
+      "scenarios": [
+        { "name": "201 BookingDetail", "status": "done", "automatedTest": "backend/.../TestCreateBookingIntegration" },
+        { "name": "403 RISK_CONSENT_REQUIRED", "status": "done", "automatedTest": "backend/.../TestCreateBookingWithoutConsentIntegration" },
+        { "name": "403 INSTRUCTOR_CLEARANCE_REQUIRED", "status": "done", "automatedTest": "backend/.../TestCreateBookingWithoutClearanceOnRopeIntegration" },
+        { "name": "409 conflict last spot", "status": "done", "automatedTest": "backend/.../TestCreateBookingParallelLastSpotIntegration" },
+        { "name": "422 NO_FREE_SPOTS / cutoff / rebooking_forbidden", "status": "done", "automatedTest": "backend/.../booking_integration_test.go" },
+        { "name": "422 sanctions forbidden", "status": "done", "automatedTest": "backend/.../TestCreateBookingForbiddenBySanctionsIntegration" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-getBooking-001",
+      "group": "Bookings",
+      "operationId": "getBooking",
+      "method": "GET",
+      "path": "/bookings/{bookingId}",
+      "scenarios": [
+        { "name": "200 with cancellation_policy", "status": "done", "automatedTest": "backend/.../TestCancelBookingIntegration" },
+        { "name": "404 not found", "status": "partial" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-cancelBooking-001",
+      "group": "Bookings",
+      "operationId": "cancelBooking",
+      "method": "DELETE",
+      "path": "/bookings/{bookingId}",
+      "scenarios": [
+        { "name": "200 cancel > 2h", "status": "done", "automatedTest": "backend/.../TestCancelBookingIntegration" },
+        { "name": "200 late cancellation 1-2h", "status": "done", "automatedTest": "backend/.../TestCancelBookingLateCancellationIntegration" },
+        { "name": "403 forbidden < 1h", "status": "done", "automatedTest": "backend/.../TestCancelBookingForbiddenIntegration" },
+        { "name": "409 already cancelled", "status": "partial" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-updateBookingRental-001",
+      "group": "Bookings",
+      "operationId": "updateBookingRental",
+      "method": "PATCH",
+      "path": "/bookings/{bookingId}/rental",
+      "scenarios": [
+        { "name": "200 updated rental + payment", "status": "done", "automatedTest": "backend/.../TestUpdateBookingRentalIntegration" },
+        { "name": "422 RENTAL_UNAVAILABLE", "status": "done", "automatedTest": "backend/.../TestUpdateBookingRentalUnavailableIntegration" },
+        { "name": "403 forbidden cancelled booking", "status": "done", "automatedTest": "backend/.../TestUpdateBookingRentalForbiddenIntegration" }
+      ],
+      "unitDomain": { "status": "na" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-listRentalEquipmentTypes-001",
+      "group": "Reference",
+      "operationId": "listRentalEquipmentTypes",
+      "method": "GET",
+      "path": "/rental-equipment-types",
+      "scenarios": [
+        { "name": "200 catalog of 4 types", "status": "partial", "automatedTest": "backend/.../contract_test.go" }
+      ],
+      "unitDomain": { "status": "na" },
+      "httpIntegration": { "status": "partial" },
+      "contract": { "status": "partial" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "API-getSystemConfig-001",
+      "group": "Reference",
+      "operationId": "getSystemConfig",
+      "method": "GET",
+      "path": "/config",
+      "scenarios": [
+        { "name": "200 SystemConfig singleton", "status": "partial", "automatedTest": "backend/.../contract_test.go" }
+      ],
+      "unitDomain": { "status": "na" },
+      "httpIntegration": { "status": "partial" },
+      "contract": { "status": "partial" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "API-registerPushToken-001",
+      "group": "Devices",
+      "operationId": "registerPushToken",
+      "method": "PUT",
+      "path": "/devices/push-token",
+      "scenarios": [
+        { "name": "200 upsert token", "status": "done", "automatedTest": "backend/.../TestRegisterPushTokenIntegration" },
+        { "name": "401 unauthorized", "status": "done", "automatedTest": "backend/.../TestRegisterPushTokenUnauthorizedIntegration" },
+        { "name": "400 invalid token", "status": "done", "automatedTest": "backend/internal/domain/push_test.go::TestValidatePushToken" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "API-createInstructorRating-001",
+      "group": "Ratings",
+      "operationId": "createInstructorRating",
+      "method": "POST",
+      "path": "/ratings",
+      "scenarios": [
+        { "name": "201 rating created", "status": "done", "automatedTest": "backend/.../TestCreateInstructorRatingIntegration" },
+        { "name": "403 gym cancelled booking", "status": "done", "automatedTest": "backend/.../TestCreateInstructorRatingGymCancelledIntegration" },
+        { "name": "422 expired window", "status": "done", "automatedTest": "backend/.../TestCreateInstructorRatingExpiredWindowIntegration" }
+      ],
+      "unitDomain": { "status": "done" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "partial" },
+      "overallStatus": "partial",
+      "notes": "Post-MVP feature"
+    },
+    {
+      "id": "API-cancelSlotByGym-001",
+      "group": "Internal",
+      "operationId": "cancelSlotByGym",
+      "method": "POST",
+      "path": "/internal/slots/{id}/cancel-by-gym",
+      "scenarios": [
+        { "name": "200 gym cancel + affected bookings", "status": "done", "automatedTest": "backend/.../TestGymCancelBookingIntegration" },
+        { "name": "401/403 invalid API key", "status": "planned" }
+      ],
+      "unitDomain": { "status": "na" },
+      "httpIntegration": { "status": "done" },
+      "contract": { "status": "planned" },
+      "overallStatus": "partial"
+    }
+  ]
+}

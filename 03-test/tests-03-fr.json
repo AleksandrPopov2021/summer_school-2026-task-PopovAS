@@ -1,0 +1,297 @@
+{
+  "section": "3",
+  "title": "Функциональные требования (FR)",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "FR-001-T01",
+      "requirement": "FR-001",
+      "name": "GET /slots возвращает слоты на 7 дней по умолчанию",
+      "backend": { "status": "done", "automatedTest": "backend/.../slot_integration_test.go::TestListSlotsIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../MvpUseCasesTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-002-T01",
+      "requirement": "FR-002",
+      "name": "Фильтрация слотов по query date",
+      "backend": { "status": "done", "automatedTest": "backend/.../slot_integration_test.go" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../MvpUseCasesTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-003-T01",
+      "requirement": "FR-003",
+      "name": "GET /slots/{id} содержит все поля карточки слота",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestGetSlotDetailIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../ScheduleAsyncMappingTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-004-T01",
+      "requirement": "FR-004",
+      "name": "Средняя оценка инструктора до записи",
+      "backend": { "status": "out_of_scope" },
+      "clientUnit": { "status": "out_of_scope" },
+      "uiE2e": { "status": "out_of_scope" },
+      "overallStatus": "out_of_scope",
+      "notes": "Post-MVP"
+    },
+    {
+      "id": "FR-005-T01",
+      "requirement": "FR-005",
+      "name": "Empty state при пустом списке слотов",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestListSlotsIntegration (empty date)" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../MvpUseCasesTest.kt" },
+      "uiE2e": { "status": "planned", "related": ["SCR-013"] },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-006-T01",
+      "requirement": "FR-006",
+      "name": "Отменённые скалодромом слоты видны в списке",
+      "backend": { "status": "done", "automatedTest": "backend/.../slot_test.go::TestBuildBookingAvailability_CancelledSlot" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../SlotAvailabilityTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-007-T01",
+      "requirement": "FR-007",
+      "name": "can_book=false при 0 свободных мест",
+      "backend": { "status": "done", "automatedTest": "backend/.../slot_test.go::TestBuildBookingAvailability_NoFreeSpots" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../SlotAvailabilityTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-008-T01",
+      "requirement": "FR-008",
+      "name": "Блокировка записи менее чем за 30 минут (cutoff)",
+      "backend": { "status": "done", "automatedTest": "backend/.../slot_test.go; booking_integration (cutoff)" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../SlotAvailabilityTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-009-T01",
+      "requirement": "FR-009",
+      "name": "Блокировка rope_routes без допуска инструктора",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestCreateBookingWithoutClearanceOnRopeIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../SlotAvailabilityTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-010-T01",
+      "requirement": "FR-010",
+      "name": "Выбор своего / прокатного снаряжения по позициям",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestCreateBookingIntegration (rental lines)" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../RentalSelectionDiffTest.kt" },
+      "uiE2e": { "status": "partial", "automatedTest": "client/.../MvpFlowTest.kt" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-011-T01",
+      "requirement": "FR-011",
+      "name": "Разбивка стоимости: training + rental + total",
+      "backend": { "status": "done", "automatedTest": "backend/internal/domain/pricing_test.go" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../CalculateBookingPriceUseCaseTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-012-T01",
+      "requirement": "FR-012",
+      "name": "403 RISK_CONSENT_REQUIRED без согласия на риск",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestCreateBookingWithoutConsentIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../MvpUseCasesTest.kt" },
+      "uiE2e": { "status": "partial", "automatedTest": "client/.../MvpFlowTest.kt::handleConsentIfNeeded" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-013-T01",
+      "requirement": "FR-013",
+      "name": "POST /bookings создаёт запись и возвращает BookingDetail",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestCreateBookingIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../MvpUseCasesTest.kt; AuthRepositoryTest.kt" },
+      "uiE2e": { "status": "partial", "automatedTest": "client/.../MvpFlowTest.kt" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-014-T01",
+      "requirement": "FR-014",
+      "name": "409 BookingConflict с актуальным состоянием слота",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestCreateBookingParallelLastSpotIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../CreateBookingConflictTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-015-T01",
+      "requirement": "FR-015",
+      "name": "Push-уведомление о подтверждении записи",
+      "backend": { "status": "done", "automatedTest": "backend/.../push/service_test.go::TestNotifyBookingCreated_SendsWhenEnabled" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../PushRoutingTest.kt" },
+      "uiE2e": { "status": "manual" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-016-T01",
+      "requirement": "FR-016",
+      "name": "GET /bookings — список активных записей",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestListBookingsIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../MvpUseCasesTest.kt" },
+      "uiE2e": { "status": "partial", "automatedTest": "client/.../MvpFlowTest.kt (tab bookings)" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-017-T01",
+      "requirement": "FR-017",
+      "name": "Отмена > 2 ч — policy none, без предупреждения",
+      "backend": { "status": "done", "automatedTest": "backend/.../cancellation_test.go::TestBuildCancellationPolicy_None; TestCancelBookingIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../BookingCancellationTest.kt" },
+      "uiE2e": { "status": "partial", "automatedTest": "client/.../MvpFlowTest.kt" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-018-T01",
+      "requirement": "FR-018",
+      "name": "Отмена 1–2 ч — late_cancellation + предупреждение",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestCancelBookingLateCancellationIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../BookingCancellationTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-019-T01",
+      "requirement": "FR-019",
+      "name": "Отмена < 1 ч — 403 CANCELLATION_FORBIDDEN",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestCancelBookingForbiddenIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../CancelBookingForbiddenTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-020-T01",
+      "requirement": "FR-020",
+      "name": "Push при отмене скалодромом (обязательный)",
+      "backend": { "status": "done", "automatedTest": "backend/.../push/service_test.go::TestNotifyGymCancellation_AlwaysSends" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../PushRoutingTest.kt" },
+      "uiE2e": { "status": "manual" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-021-T01",
+      "requirement": "FR-021",
+      "name": "Причина отмены скалодромом в booking detail",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestGymCancelBookingIntegration" },
+      "clientUnit": { "status": "planned" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-022-T01",
+      "requirement": "FR-022",
+      "name": "GET /slots/alternatives — found / not found",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestFindAlternativeSlotFoundIntegration; TestFindAlternativeSlotNotFoundIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../AlternativeSlotLogicTest.kt" },
+      "uiE2e": { "status": "planned", "related": ["SCR-009"] },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-023-T01",
+      "requirement": "FR-023",
+      "name": "Статус оплаты unpaid / paid / refund в booking",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestGymCancelBookingIntegration (refund)" },
+      "clientUnit": { "status": "planned" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-024-T01",
+      "requirement": "FR-024",
+      "name": "Push-напоминание за сутки до тренировки",
+      "backend": { "status": "partial", "notes": "worker log only" },
+      "clientUnit": { "status": "planned" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "planned"
+    },
+    {
+      "id": "FR-025-T01",
+      "requirement": "FR-025",
+      "name": "Push-напоминание за N часов (configurable)",
+      "backend": { "status": "partial", "notes": "worker log only" },
+      "clientUnit": { "status": "planned" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "planned"
+    },
+    {
+      "id": "FR-026-T01",
+      "requirement": "FR-026",
+      "name": "POST /clients — регистрация по телефону",
+      "backend": { "status": "done", "automatedTest": "backend/.../client_integration_test.go; client_test.go::TestValidatePhone" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../RegistrationValidatorTest.kt" },
+      "uiE2e": { "status": "partial", "automatedTest": "client/.../MvpFlowTest.kt::registerNewClient" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-027-T01",
+      "requirement": "FR-027",
+      "name": "Бейдж «постоянный клиент» после N посещений",
+      "backend": { "status": "done", "automatedTest": "backend/internal/domain/loyalty_test.go" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../ProfileLoyaltyTest.kt" },
+      "uiE2e": { "status": "planned", "related": ["SCR-010"] },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-028-T01",
+      "requirement": "FR-028",
+      "name": "PATCH /bookings/{id}/rental — изменение проката",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestUpdateBookingRentalIntegration; TestUpdateBookingRentalUnavailableIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../UpdateBookingRentalIntegrationTest.kt" },
+      "uiE2e": { "status": "planned" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-029-T01",
+      "requirement": "FR-029",
+      "name": "POST /ratings — оценка 1–5 в окне 1–2 суток",
+      "backend": { "status": "done", "automatedTest": "backend/.../rating_integration_test.go" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../RatingLogicTest.kt" },
+      "uiE2e": { "status": "out_of_scope" },
+      "overallStatus": "partial",
+      "notes": "Post-MVP UI"
+    },
+    {
+      "id": "FR-030-T01",
+      "requirement": "FR-030",
+      "name": "Блокировка оценки при отмене скалодромом",
+      "backend": { "status": "done", "automatedTest": "backend/.../TestCreateInstructorRatingGymCancelledIntegration" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../RatingLogicTest.kt" },
+      "uiE2e": { "status": "out_of_scope" },
+      "overallStatus": "done"
+    },
+    {
+      "id": "FR-031-T01",
+      "requirement": "FR-031",
+      "name": "Push-приглашение оценить инструктора",
+      "backend": { "status": "done", "automatedTest": "backend/.../push/service_test.go::TestSendRatingInvitation_SendsWhenEnabled" },
+      "clientUnit": { "status": "done", "automatedTest": "client/.../PushRoutingTest.kt" },
+      "uiE2e": { "status": "out_of_scope" },
+      "overallStatus": "partial"
+    },
+    {
+      "id": "FR-032-T01",
+      "requirement": "FR-032",
+      "name": "PATCH notification-preferences — только отключаемые поля",
+      "backend": { "status": "partial", "automatedTest": "backend/.../client_test.go::TestValidateNotificationPreferencesUpdate" },
+      "clientUnit": { "status": "planned" },
+      "uiE2e": { "status": "planned", "related": ["SCR-011"] },
+      "overallStatus": "partial"
+    }
+  ]
+}

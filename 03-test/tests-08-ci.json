@@ -1,0 +1,108 @@
+{
+  "section": "8",
+  "title": "CI/CD и окружения",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "CI-BE-001",
+      "component": "Backend",
+      "name": "GitHub Actions: migrate empty PostgreSQL",
+      "pipeline": ".github/workflows/backend-ci.yml",
+      "command": "goose -dir migrations postgres $DATABASE_URL up",
+      "status": "done",
+      "trigger": ["push backend/**", "pull_request backend/**"]
+    },
+    {
+      "id": "CI-BE-002",
+      "component": "Backend",
+      "name": "GitHub Actions: seed reference data",
+      "pipeline": ".github/workflows/backend-ci.yml",
+      "command": "go run ./cmd/seed",
+      "status": "done"
+    },
+    {
+      "id": "CI-BE-003",
+      "component": "Backend",
+      "name": "GitHub Actions: go test ./... -count=1",
+      "pipeline": ".github/workflows/backend-ci.yml",
+      "status": "done",
+      "coverage": ["unit", "integration"]
+    },
+    {
+      "id": "CI-BE-004",
+      "component": "Backend",
+      "name": "GitHub Actions: golangci-lint",
+      "pipeline": ".github/workflows/backend-ci.yml",
+      "status": "done"
+    },
+    {
+      "id": "CI-CL-001",
+      "component": "Client unit",
+      "name": "CI: :shared:allTests on PR",
+      "pipeline": null,
+      "command": "./gradlew :shared:cleanAllTests :shared:allTests",
+      "status": "planned",
+      "priority": "high"
+    },
+    {
+      "id": "CI-CL-002",
+      "component": "Client Android UI",
+      "name": "CI: connectedDebugAndroidTest on emulator",
+      "pipeline": null,
+      "command": "./gradlew :composeApp:connectedDebugAndroidTest",
+      "status": "planned",
+      "priority": "medium"
+    },
+    {
+      "id": "CI-CL-003",
+      "component": "Client",
+      "name": "CI: Android lint + compile",
+      "pipeline": null,
+      "command": "./gradlew :composeApp:assembleDebug",
+      "status": "planned",
+      "priority": "medium"
+    },
+    {
+      "id": "CI-CNT-001",
+      "component": "Contract",
+      "name": "Contract tests in backend CI job",
+      "pipeline": ".github/workflows/backend-ci.yml",
+      "automatedTest": "backend/.../contract_test.go; contract_helpers_test.go",
+      "status": "partial"
+    },
+    {
+      "id": "CI-E2E-001",
+      "component": "Staging E2E",
+      "name": "docker-compose.staging + client against real API",
+      "pipeline": null,
+      "command": "docker compose -f docker-compose.staging.yml up",
+      "status": "planned",
+      "priority": "high",
+      "related": ["UC-002", "UC-003", "NFR-002"]
+    },
+    {
+      "id": "CI-LOCAL-001",
+      "component": "Local dev",
+      "name": "Backend: make migrate seed test",
+      "environment": "local",
+      "command": "cd backend && make migrate seed && go test ./...",
+      "status": "done"
+    },
+    {
+      "id": "CI-LOCAL-002",
+      "component": "Local dev",
+      "name": "Client: shared unit tests",
+      "environment": "local",
+      "command": "cd client && ./gradlew :shared:allTests",
+      "status": "done"
+    },
+    {
+      "id": "CI-LOCAL-003",
+      "component": "Local dev",
+      "name": "Client: Android instrumented smoke",
+      "environment": "local + emulator",
+      "command": "cd client && ./gradlew :composeApp:connectedDebugAndroidTest",
+      "status": "done"
+    }
+  ]
+}
