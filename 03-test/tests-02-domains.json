@@ -1,0 +1,317 @@
+{
+  "section": "2",
+  "title": "Покрытие по доменам приложения",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "DOM-01-001",
+      "domain": "01. Авторизация",
+      "name": "Unit: валидация телефона и risk consent",
+      "artifacts": ["SCR-001", "SCR-002", "LOGIC-001", "LOGIC-002", "FR-026"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "backend/internal/domain/client_test.go; client/.../RegistrationValidatorTest.kt; CheckSessionUseCaseTest.kt"
+    },
+    {
+      "id": "DOM-01-002",
+      "domain": "01. Авторизация",
+      "name": "Integration: register → GET me → PATCH consent",
+      "artifacts": ["LOGIC-001", "LOGIC-002", "LOGIC-006"],
+      "levels": ["integration"],
+      "status": "done",
+      "automatedTest": "backend/.../client_integration_test.go::TestClientFlowIntegration"
+    },
+    {
+      "id": "DOM-01-003",
+      "domain": "01. Авторизация",
+      "name": "UI/E2E: splash и регистрация нового клиента",
+      "artifacts": ["SCR-001", "SCR-002"],
+      "levels": ["component", "e2e"],
+      "status": "partial",
+      "automatedTest": "client/.../MvpFlowTest.kt",
+      "notes": "iOS UI-тесты не добавлены"
+    },
+    {
+      "id": "DOM-01-004",
+      "domain": "01. Авторизация",
+      "name": "JWT middleware: 401 без Bearer",
+      "artifacts": ["LOGIC-001"],
+      "levels": ["unit", "integration"],
+      "status": "done",
+      "automatedTest": "backend/.../auth_test.go; jwt_test.go"
+    },
+    {
+      "id": "DOM-02-001",
+      "domain": "02. Расписание",
+      "name": "Unit: BuildBookingAvailability (boulder, rope, cutoff, no spots, cancelled)",
+      "artifacts": ["LOGIC-004", "FR-007", "FR-008", "FR-009"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "backend/internal/domain/slot_test.go; client/.../SlotAvailabilityTest.kt"
+    },
+    {
+      "id": "DOM-02-002",
+      "domain": "02. Расписание",
+      "name": "Unit: период расписания 7 дней по умолчанию",
+      "artifacts": ["LOGIC-003", "FR-001"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "backend/internal/domain/slot_test.go::TestParseSlotPeriod_DefaultSevenDays"
+    },
+    {
+      "id": "DOM-02-003",
+      "domain": "02. Расписание",
+      "name": "Integration: GET /slots, GET /slots/{id}, clearances",
+      "artifacts": ["LOGIC-003", "LOGIC-004", "FR-001", "FR-002", "FR-003", "FR-006"],
+      "levels": ["integration"],
+      "status": "done",
+      "automatedTest": "backend/.../slot_integration_test.go"
+    },
+    {
+      "id": "DOM-02-004",
+      "domain": "02. Расписание",
+      "name": "Client: загрузка и маппинг расписания",
+      "artifacts": ["LOGIC-003", "SCR-003"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "client/.../MvpUseCasesTest.kt; ScheduleAsyncMappingTest.kt"
+    },
+    {
+      "id": "DOM-02-005",
+      "domain": "02. Расписание",
+      "name": "UI: empty state и фильтр по дате",
+      "artifacts": ["SCR-013", "SCR-003", "FR-002", "FR-005"],
+      "levels": ["component"],
+      "status": "planned",
+      "notes": "empty/cancelled slots — ручная проверка"
+    },
+    {
+      "id": "DOM-03-001",
+      "domain": "03. Запись",
+      "name": "Unit: расчёт стоимости training + rental − loyalty",
+      "artifacts": ["LOGIC-007", "FR-010", "FR-011"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "backend/internal/domain/pricing_test.go; client/.../CalculateBookingPriceUseCaseTest.kt"
+    },
+    {
+      "id": "DOM-03-002",
+      "domain": "03. Запись",
+      "name": "Unit: черновик записи и diff проката",
+      "artifacts": ["LOGIC-005", "LOGIC-007", "FR-010"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "client/.../BookingDraftUseCaseTest.kt; RentalSelectionDiffTest.kt"
+    },
+    {
+      "id": "DOM-03-003",
+      "domain": "03. Запись",
+      "name": "Integration: POST /bookings — happy path и все коды ошибок",
+      "artifacts": ["LOGIC-005", "LOGIC-006", "FR-012", "FR-013", "FR-014"],
+      "levels": ["integration"],
+      "status": "done",
+      "automatedTest": "backend/.../booking_integration_test.go"
+    },
+    {
+      "id": "DOM-03-004",
+      "domain": "03. Запись",
+      "name": "Integration: гонка за последнее место (parallel + 50 concurrent)",
+      "artifacts": ["FR-013", "FR-014"],
+      "levels": ["integration", "non_functional"],
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateBookingParallelLastSpotIntegration; TestCreateBookingFiftyConcurrentLastSpotIntegration"
+    },
+    {
+      "id": "DOM-03-005",
+      "domain": "03. Запись",
+      "name": "UI/E2E: запись на слот и экран согласия",
+      "artifacts": ["SCR-005", "SCR-015", "LOGIC-006"],
+      "levels": ["component", "e2e"],
+      "status": "partial",
+      "automatedTest": "client/.../MvpFlowTest.kt::bookFirstAvailableSlot; handleConsentIfNeeded"
+    },
+    {
+      "id": "DOM-04-001",
+      "domain": "04. Мои записи",
+      "name": "Unit: BuildCancellationPolicy",
+      "artifacts": ["LOGIC-008", "FR-017", "FR-018", "FR-019"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "backend/internal/domain/cancellation_test.go; client/.../BookingCancellationTest.kt"
+    },
+    {
+      "id": "DOM-04-002",
+      "domain": "04. Мои записи",
+      "name": "Integration: list / get / cancel booking",
+      "artifacts": ["SCR-006", "SCR-007", "SCR-008", "FR-016"],
+      "levels": ["integration"],
+      "status": "done",
+      "automatedTest": "backend/.../booking_integration_test.go (list, cancel, late, forbidden)"
+    },
+    {
+      "id": "DOM-04-003",
+      "domain": "04. Мои записи",
+      "name": "Integration: gym cancel, rebooking forbidden, alternatives",
+      "artifacts": ["LOGIC-009", "SCR-009", "FR-020", "FR-021", "FR-022"],
+      "levels": ["integration"],
+      "status": "done",
+      "automatedTest": "backend/.../TestGymCancelBookingIntegration; TestFindAlternativeSlotFoundIntegration"
+    },
+    {
+      "id": "DOM-04-004",
+      "domain": "04. Мои записи",
+      "name": "Client unit: alternative slot logic, rebooking forbidden",
+      "artifacts": ["LOGIC-009"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "client/.../AlternativeSlotLogicTest.kt; RebookingForbiddenTest.kt"
+    },
+    {
+      "id": "DOM-04-005",
+      "domain": "04. Мои записи",
+      "name": "UI/E2E: отмена записи из списка",
+      "artifacts": ["SCR-006", "SCR-008"],
+      "levels": ["component", "e2e"],
+      "status": "partial",
+      "automatedTest": "client/.../MvpFlowTest.kt (cancel flow)"
+    },
+    {
+      "id": "DOM-04-006",
+      "domain": "04. Мои записи",
+      "name": "UI: экран альтернативного слота SCR-009",
+      "artifacts": ["SCR-009", "FR-022"],
+      "levels": ["component"],
+      "status": "planned"
+    },
+    {
+      "id": "DOM-05-001",
+      "domain": "05. Профиль",
+      "name": "Unit: loyalty status и notification prefs validation",
+      "artifacts": ["LOGIC-011", "FR-027", "FR-032"],
+      "levels": ["unit"],
+      "status": "partial",
+      "automatedTest": "backend/internal/domain/loyalty_test.go; client_test.go::TestValidateNotificationPreferencesUpdate; ProfileLoyaltyTest.kt"
+    },
+    {
+      "id": "DOM-05-002",
+      "domain": "05. Профиль",
+      "name": "Integration: PATCH notification-preferences",
+      "artifacts": ["LOGIC-011", "FR-032"],
+      "levels": ["integration"],
+      "status": "planned",
+      "notes": "Отдельный HTTP integration test отсутствует"
+    },
+    {
+      "id": "DOM-05-003",
+      "domain": "05. Профиль",
+      "name": "UI: профиль и настройки уведомлений",
+      "artifacts": ["SCR-010", "SCR-011"],
+      "levels": ["component"],
+      "status": "planned"
+    },
+    {
+      "id": "DOM-06-001",
+      "domain": "06. Уведомления",
+      "name": "Unit: push routing и validate token",
+      "artifacts": ["LOGIC-013", "LOGIC-012"],
+      "levels": ["unit"],
+      "status": "partial",
+      "automatedTest": "backend/internal/domain/push_test.go; client/.../PushRoutingTest.kt"
+    },
+    {
+      "id": "DOM-06-002",
+      "domain": "06. Уведомления",
+      "name": "Unit: push service (created, gym cancel, rating invite)",
+      "artifacts": ["FR-015", "FR-020", "FR-031"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "backend/internal/application/push/service_test.go"
+    },
+    {
+      "id": "DOM-06-003",
+      "domain": "06. Уведомления",
+      "name": "Integration: PUT /devices/push-token",
+      "artifacts": ["LOGIC-012"],
+      "levels": ["integration"],
+      "status": "done",
+      "automatedTest": "backend/.../push_integration_test.go"
+    },
+    {
+      "id": "DOM-06-004",
+      "domain": "06. Уведомления",
+      "name": "Manual: реальная доставка FCM/APNs и deep link SCR-014",
+      "artifacts": ["SCR-014", "LOGIC-013", "FR-015", "FR-020"],
+      "levels": ["manual", "e2e"],
+      "status": "manual"
+    },
+    {
+      "id": "DOM-06-005",
+      "domain": "06. Уведомления",
+      "name": "Worker: push-напоминания FR-024/025",
+      "artifacts": ["FR-024", "FR-025", "UC-005"],
+      "levels": ["integration"],
+      "status": "planned"
+    },
+    {
+      "id": "DOM-07-001",
+      "domain": "07. Оценка (Post-MVP)",
+      "name": "Unit + integration: create rating",
+      "artifacts": ["LOGIC-014", "FR-029", "FR-030"],
+      "levels": ["unit", "integration"],
+      "status": "done",
+      "automatedTest": "backend/.../rating_integration_test.go; client/.../RatingLogicTest.kt"
+    },
+    {
+      "id": "DOM-07-002",
+      "domain": "07. Оценка (Post-MVP)",
+      "name": "UI: SCR-012 rating screen",
+      "artifacts": ["SCR-012", "FR-029"],
+      "levels": ["component"],
+      "status": "out_of_scope"
+    },
+    {
+      "id": "DOM-REF-001",
+      "domain": "Справочники / config",
+      "name": "Integration: GET /config, GET /rental-equipment-types",
+      "artifacts": ["LOGIC-001", "LOGIC-003"],
+      "levels": ["integration", "contract"],
+      "status": "partial",
+      "automatedTest": "backend/.../contract_test.go"
+    },
+    {
+      "id": "DOM-INT-001",
+      "domain": "Internal / worker",
+      "name": "Integration: gym cancel internal API",
+      "artifacts": ["UC-004"],
+      "levels": ["integration"],
+      "status": "done",
+      "automatedTest": "backend/.../TestGymCancelBookingIntegration"
+    },
+    {
+      "id": "DOM-INT-002",
+      "domain": "Internal / worker",
+      "name": "Unit: complete bookings → loyalty threshold",
+      "artifacts": ["UC-007", "FR-027"],
+      "levels": ["unit", "integration"],
+      "status": "done",
+      "automatedTest": "backend/.../worker/service_test.go; push_integration_test.go::TestCompleteBookingGrantsLoyaltyIntegration"
+    },
+    {
+      "id": "DOM-X-001",
+      "domain": "Cross-cutting",
+      "name": "Unit: ErrorResponse mapping (NFR-003)",
+      "artifacts": ["NFR-003", "NFR-009"],
+      "levels": ["unit"],
+      "status": "done",
+      "automatedTest": "backend/.../errors_test.go; client CreateBookingConflictTest"
+    },
+    {
+      "id": "DOM-X-002",
+      "domain": "Cross-cutting",
+      "name": "Manual: русские тексты ошибок в UI (NFR-005)",
+      "artifacts": ["NFR-005"],
+      "levels": ["manual"],
+      "status": "manual"
+    }
+  ]
+}

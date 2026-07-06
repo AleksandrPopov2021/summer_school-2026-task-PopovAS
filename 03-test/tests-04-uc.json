@@ -1,0 +1,312 @@
+{
+  "section": "4",
+  "title": "Use Cases (UC)",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "UC-001-T01",
+      "useCase": "UC-001",
+      "name": "Основной сценарий: список слотов на 7 дней",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestListSlotsIntegration; client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "UC-001-T02",
+      "useCase": "UC-001",
+      "name": "Alt 3a: empty state при отсутствии слотов",
+      "type": "alternative",
+      "status": "partial",
+      "automatedTest": "client/.../MvpUseCasesTest.kt",
+      "notes": "UI empty state — planned"
+    },
+    {
+      "id": "UC-001-T03",
+      "useCase": "UC-001",
+      "name": "Alt 3b: отменённые слоты с пометкой",
+      "type": "alternative",
+      "status": "partial",
+      "automatedTest": "backend/.../slot_test.go::TestBuildBookingAvailability_CancelledSlot"
+    },
+    {
+      "id": "UC-001-T04",
+      "useCase": "UC-001",
+      "name": "Offline: кэш расписания при отсутствии сети",
+      "type": "alternative",
+      "status": "partial",
+      "automatedTest": "client/.../CheckSessionUseCaseTest.kt (offline)"
+    },
+    {
+      "id": "UC-002-T01",
+      "useCase": "UC-002",
+      "name": "Основной сценарий: запись с прокатом и согласием",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateBookingIntegration; client/.../MvpFlowTest.kt"
+    },
+    {
+      "id": "UC-002-T02",
+      "useCase": "UC-002",
+      "name": "Alt 2a: cutoff < 30 мин — блокировка",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../slot_test.go; client/.../SlotAvailabilityTest.kt"
+    },
+    {
+      "id": "UC-002-T03",
+      "useCase": "UC-002",
+      "name": "Alt 2b: 0 мест — can_book=false",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestBuildBookingAvailability_NoFreeSpots"
+    },
+    {
+      "id": "UC-002-T04",
+      "useCase": "UC-002",
+      "name": "Alt 2c: rope без допуска — 403",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateBookingWithoutClearanceOnRopeIntegration"
+    },
+    {
+      "id": "UC-002-T05",
+      "useCase": "UC-002",
+      "name": "Alt 8a: 409 conflict — места заняты",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateBookingParallelLastSpotIntegration; client/.../CreateBookingConflictTest.kt"
+    },
+    {
+      "id": "UC-002-T06",
+      "useCase": "UC-002",
+      "name": "Alt: санкции — booking forbidden",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateBookingForbiddenBySanctionsIntegration"
+    },
+    {
+      "id": "UC-003-T01",
+      "useCase": "UC-003",
+      "name": "Вариант A: отмена > 2 ч без предупреждения",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestCancelBookingIntegration; client/.../MvpFlowTest.kt"
+    },
+    {
+      "id": "UC-003-T02",
+      "useCase": "UC-003",
+      "name": "Вариант B: отмена 1–2 ч с late_cancellation",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestCancelBookingLateCancellationIntegration; client/.../BookingCancellationTest.kt"
+    },
+    {
+      "id": "UC-003-T03",
+      "useCase": "UC-003",
+      "name": "Alt 3a: < 1 ч — forbidden",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestCancelBookingForbiddenIntegration; client/.../CancelBookingForbiddenTest.kt"
+    },
+    {
+      "id": "UC-003-T04",
+      "useCase": "UC-003",
+      "name": "UI: предупреждение при late cancellation",
+      "type": "alternative",
+      "status": "planned",
+      "related": ["SCR-008", "FR-018"]
+    },
+    {
+      "id": "UC-004-T01",
+      "useCase": "UC-004",
+      "name": "Gym cancel: slot cancelled, bookings updated, push sent",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestGymCancelBookingIntegration; push/service_test.go"
+    },
+    {
+      "id": "UC-004-T02",
+      "useCase": "UC-004",
+      "name": "Rebooking forbidden на тот же слот после gym cancel",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestRebookingForbiddenAfterGymCancelIntegration; client/.../RebookingForbiddenTest.kt"
+    },
+    {
+      "id": "UC-004-T03",
+      "useCase": "UC-004",
+      "name": "Refund payment_status при paid booking",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestGymCancelBookingIntegration"
+    },
+    {
+      "id": "UC-005-T01",
+      "useCase": "UC-005",
+      "name": "Push-напоминание за сутки",
+      "type": "happy_path",
+      "status": "planned",
+      "related": ["FR-024"]
+    },
+    {
+      "id": "UC-005-T02",
+      "useCase": "UC-005",
+      "name": "Push-напоминание за N часов (config)",
+      "type": "happy_path",
+      "status": "planned",
+      "related": ["FR-025"]
+    },
+    {
+      "id": "UC-005-T03",
+      "useCase": "UC-005",
+      "name": "Alt: напоминания не отключаются (NFR-004)",
+      "type": "negative",
+      "status": "partial",
+      "automatedTest": "backend/.../client_test.go::TestValidateNotificationPreferencesUpdate"
+    },
+    {
+      "id": "UC-006-T01",
+      "useCase": "UC-006",
+      "name": "Регистрация нового клиента — 201 + token",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestClientFlowIntegration; client/.../MvpFlowTest.kt"
+    },
+    {
+      "id": "UC-006-T02",
+      "useCase": "UC-006",
+      "name": "Alt: 409 CLIENT_ALREADY_EXISTS",
+      "type": "negative",
+      "status": "partial",
+      "automatedTest": "client/.../RegistrationValidatorTest.kt; MvpUseCasesTest.kt"
+    },
+    {
+      "id": "UC-006-T03",
+      "useCase": "UC-006",
+      "name": "Повторный запуск — сессия сохранена",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "client/.../CheckSessionUseCaseTest.kt"
+    },
+    {
+      "id": "UC-007-T01",
+      "useCase": "UC-007",
+      "name": "Loyalty: below / at / above threshold",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/internal/domain/loyalty_test.go; client/.../ProfileLoyaltyTest.kt"
+    },
+    {
+      "id": "UC-007-T02",
+      "useCase": "UC-007",
+      "name": "Complete booking increments completed count",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestCompleteBookingGrantsLoyaltyIntegration"
+    },
+    {
+      "id": "UC-008-T01",
+      "useCase": "UC-008",
+      "name": "PATCH rental — успешная смена проката",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestUpdateBookingRentalIntegration; client/.../UpdateBookingRentalIntegrationTest.kt"
+    },
+    {
+      "id": "UC-008-T02",
+      "useCase": "UC-008",
+      "name": "Alt: RENTAL_UNAVAILABLE — недостаточно фонда",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestUpdateBookingRentalUnavailableIntegration"
+    },
+    {
+      "id": "UC-008-T03",
+      "useCase": "UC-008",
+      "name": "Alt: forbidden для cancelled booking",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestUpdateBookingRentalForbiddenIntegration"
+    },
+    {
+      "id": "UC-009-T01",
+      "useCase": "UC-009",
+      "name": "Создание оценки 1–5 после completed booking",
+      "type": "happy_path",
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateInstructorRatingIntegration"
+    },
+    {
+      "id": "UC-009-T02",
+      "useCase": "UC-009",
+      "name": "Alt: expired window — отказ",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateInstructorRatingExpiredWindowIntegration; client/.../RatingLogicTest.kt"
+    },
+    {
+      "id": "UC-009-T03",
+      "useCase": "UC-009",
+      "name": "Alt: gym cancelled booking — оценка запрещена",
+      "type": "negative",
+      "status": "done",
+      "automatedTest": "backend/.../TestCreateInstructorRatingGymCancelledIntegration"
+    },
+    {
+      "id": "UC-010-T01",
+      "useCase": "UC-010",
+      "name": "Просмотр рейтинга инструктора",
+      "type": "happy_path",
+      "status": "out_of_scope",
+      "notes": "Post-MVP"
+    },
+    {
+      "id": "UC-011-T01",
+      "useCase": "UC-011",
+      "name": "GET /notification-preferences",
+      "type": "happy_path",
+      "status": "partial",
+      "automatedTest": "backend/.../TestClientFlowIntegration (read prefs)"
+    },
+    {
+      "id": "UC-011-T02",
+      "useCase": "UC-011",
+      "name": "PATCH: отключение booking_confirmation / rating_invitation",
+      "type": "happy_path",
+      "status": "planned",
+      "related": ["FR-032", "LOGIC-011"]
+    },
+    {
+      "id": "UC-011-T03",
+      "useCase": "UC-011",
+      "name": "Alt: reject изменение reminders_enabled / gym_cancellation_enabled",
+      "type": "negative",
+      "status": "partial",
+      "automatedTest": "backend/.../client_test.go::TestValidateNotificationPreferencesUpdate"
+    },
+    {
+      "id": "UC-012-T01",
+      "useCase": "UC-012",
+      "name": "Отображение payment_status unpaid в booking detail",
+      "type": "happy_path",
+      "status": "partial",
+      "automatedTest": "backend/.../TestCreateBookingIntegration"
+    },
+    {
+      "id": "UC-012-T02",
+      "useCase": "UC-012",
+      "name": "Refund status после gym cancel",
+      "type": "happy_path",
+      "status": "partial",
+      "automatedTest": "backend/.../TestGymCancelBookingIntegration"
+    },
+    {
+      "id": "UC-012-T03",
+      "useCase": "UC-012",
+      "name": "UI: badges unpaid / paid / refund",
+      "type": "happy_path",
+      "status": "planned",
+      "related": ["SCR-007", "FR-023"]
+    }
+  ]
+}

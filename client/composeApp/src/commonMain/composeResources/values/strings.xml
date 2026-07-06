@@ -1,0 +1,225 @@
+<resources>
+    <!-- Приложение -->
+    <string name="app_name">Вертикаль</string>
+    <string name="app_tagline">Скалодром «Вертикаль»</string>
+    <string name="app_version">v0.1.0</string>
+
+    <!-- SCR-002 Регистрация -->
+    <string name="title_registration">Регистрация</string>
+    <string name="field_phone">Телефон</string>
+    <string name="field_full_name">ФИО</string>
+    <string name="field_full_name_placeholder">Иванов Иван Иванович</string>
+    <string name="field_birth_date">Дата рождения</string>
+    <string name="action_register">Зарегистрироваться</string>
+    <string name="error_phone_invalid">Введите корректный номер телефона</string>
+    <string name="error_name_invalid">Укажите фамилию и имя</string>
+    <string name="error_birth_invalid">Укажите корректную дату рождения</string>
+    <string name="picker_confirm">Готово</string>
+    <string name="picker_cancel">Отмена</string>
+
+    <!-- Нижняя навигация (Shell) -->
+    <string name="tab_schedule">Расписание</string>
+    <string name="tab_bookings">Мои записи</string>
+    <string name="tab_profile">Профиль</string>
+
+    <!-- SCR-010 Профиль -->
+    <string name="title_profile">Профиль</string>
+    <string name="profile_birth_date_label">Дата рождения</string>
+    <string name="profile_loyal_badge">Постоянный клиент</string>
+    <string name="profile_loyal_progress">%1$d из %2$d посещений</string>
+    <string name="profile_loyal_remaining">До статуса осталось %1$d посещений</string>
+    <string name="profile_loyal_complete">Вы — постоянный клиент!</string>
+    <string name="profile_loyal_discount">Скидка %1$d%% на прокат</string>
+    <string name="profile_notification_settings">Настройки уведомлений</string>
+    <string name="profile_logout">Выйти</string>
+    <string name="profile_logout_confirm_title">Выход</string>
+    <string name="profile_logout_confirm_message">Вы уверены, что хотите выйти?</string>
+    <string name="profile_stale_banner">Данные могут быть устаревшими</string>
+    <string name="profile_sanctions_late_cancel">Поздних отмен: %1$d</string>
+    <string name="profile_sanctions_no_show">Пропусков: %1$d</string>
+
+    <!-- SCR-011 Настройки уведомлений -->
+    <string name="title_notification_settings">Настройки уведомлений</string>
+    <string name="notification_settings_booking_confirmation">Подтверждение записи</string>
+    <string name="notification_settings_booking_confirmation_desc">Уведомление после успешной записи</string>
+    <string name="notification_settings_rating">Приглашение к оценке</string>
+    <string name="notification_settings_rating_desc">Предложение оценить инструктора</string>
+    <string name="notification_settings_reminders">Напоминания о тренировке</string>
+    <string name="notification_settings_reminders_desc">За сутки и за несколько часов до тренировки</string>
+    <string name="notification_settings_gym_cancel">Отмена скалодромом</string>
+    <string name="notification_settings_gym_cancel_desc">Срочное уведомление об отмене тренировки</string>
+    <string name="notification_locked_hint">Это уведомление нельзя отключить</string>
+    <string name="notification_save">Сохранить</string>
+    <string name="notification_saved">Настройки сохранены</string>
+    <string name="notification_unsaved_title">Несохранённые изменения</string>
+    <string name="notification_unsaved_message">Сохранить изменения перед выходом?</string>
+    <string name="notification_unsaved_save">Сохранить</string>
+    <string name="notification_unsaved_discard">Не сохранять</string>
+
+    <!-- SCR-014 Push view (LOGIC-013) -->
+    <string name="push_title_booking_confirmed">Запись подтверждена</string>
+    <string name="push_title_reminder">Напоминание о тренировке</string>
+    <string name="push_title_gym_cancel">Тренировка отменена</string>
+    <string name="push_title_rating">Оцените инструктора</string>
+    <string name="push_title_invalid">Уведомление недоступно</string>
+    <string name="push_invalid_message">Не удалось открыть уведомление. Перейдите в расписание или мои записи.</string>
+    <string name="push_action_my_bookings">Посмотреть в моих записях</string>
+    <string name="push_action_booking_details">Посмотреть детали</string>
+    <string name="push_action_book_alternative">Посмотреть альтернативы</string>
+    <string name="push_action_rate">Оценить</string>
+    <string name="push_label_zone">Зона</string>
+    <string name="push_label_address">Адрес</string>
+    <string name="push_label_instructor">Инструктор</string>
+    <string name="push_label_reason">Причина</string>
+    <string name="push_foreground_banner">Новое уведомление — нажмите, чтобы открыть</string>
+
+    <!-- SCR-003 Расписание -->
+    <string name="title_schedule">Расписание</string>
+    <string name="schedule_today">Сегодня</string>
+    <string name="schedule_spots_left">осталось %1$d из %2$d</string>
+    <string name="schedule_rental_from">Прокат: от %1$d ₽</string>
+    <string name="schedule_instructor_rating">★ %1$s</string>
+    <string name="schedule_status_available">Запись открыта</string>
+    <string name="schedule_status_few_spots">Осталось мало мест</string>
+    <string name="schedule_status_no_spots">Мест нет</string>
+    <string name="schedule_status_booking_closed">Запись закрыта</string>
+    <string name="schedule_status_clearance">Нужен допуск инструктора</string>
+    <string name="schedule_status_cancelled">Отменено</string>
+    <string name="schedule_empty_subtitle">Попробуйте выбрать другую дату или проверьте позже</string>
+    <string name="action_book">Записаться</string>
+    <string name="action_choose_another_date">Выбрать другую дату</string>
+
+    <!-- SCR-004 Детали слота -->
+    <string name="title_slot_detail">Детали тренировки</string>
+    <string name="slot_time_range">%1$s — %2$s</string>
+    <string name="slot_label_instructor">Инструктор</string>
+    <string name="slot_label_availability">Доступность</string>
+    <string name="slot_label_rental">Прокат</string>
+    <string name="slot_rental_empty">Прокат уточняйте на месте</string>
+    <string name="slot_rental_price">%1$s — %2$d ₽</string>
+    <string name="slot_status_cancelled_full">Тренировка отменена скалодромом</string>
+    <string name="slot_not_found_title">Слот не найден</string>
+    <string name="action_to_schedule">К расписанию</string>
+    <string name="slot_difficulty_beginner">Начальный уровень</string>
+    <string name="slot_difficulty_experienced">Для опытных</string>
+
+    <!-- Общие переиспользуемые состояния -->
+    <string name="state_loading">Загрузка…</string>
+    <string name="state_empty_default">Пока пусто</string>
+    <string name="state_error_default">Что-то пошло не так</string>
+    <string name="action_retry">Повторить</string>
+    <string name="banner_offline">Нет сети — показаны сохранённые данные</string>
+
+    <!-- Пустые состояния экранов -->
+    <string name="empty_schedule">Пока нет доступных тренировок</string>
+    <string name="empty_bookings">Нет активных записей</string>
+
+    <!-- Каталог сообщений об ошибках (NFR-003) -->
+    <string name="error_network">Нет соединения с сервером. Проверьте интернет и повторите.</string>
+    <string name="error_serialization">Не удалось обработать ответ сервера.</string>
+    <string name="error_unauthorized">Требуется авторизация.</string>
+    <string name="error_not_found">Данные не найдены.</string>
+    <string name="error_server">Сервис временно недоступен. Попробуйте позже.</string>
+    <string name="error_client_already_exists">Клиент с указанным номером телефона уже зарегистрирован.</string>
+    <string name="error_instructor_clearance_required">Для записи на «трассы с верёвкой» требуется допуск инструктора.</string>
+    <string name="error_risk_consent_required">Необходимо подтвердить согласие на риск.</string>
+    <string name="error_no_free_spots">Нет свободных мест на выбранный слот.</string>
+    <string name="error_booking_cutoff">Запись закрыта — до начала тренировки менее 30 минут.</string>
+    <string name="error_booking_conflict">Места на слот уже заняты. Обновите расписание.</string>
+    <string name="error_cancellation_forbidden">Отмена запрещена менее чем за 1 час до начала.</string>
+    <string name="error_rental_unavailable">Выбранные позиции проката недоступны на данный слот.</string>
+    <string name="error_unknown">Неизвестная ошибка.</string>
+    <string name="error_bad_request">Некорректный запрос. Проверьте введённые данные.</string>
+    <string name="error_rating_gym_cancelled">Оценка недоступна — тренировка отменена скалодромом.</string>
+    <string name="error_rating_window_expired">Срок оценки инструктора истёк.</string>
+    <string name="error_rating_already_submitted">Вы уже оценили этого инструктора.</string>
+
+    <!-- Accessibility (NFR) -->
+    <string name="a11y_app_logo">Логотип скалодрома Вертикаль</string>
+    <string name="a11y_back">Назад</string>
+    <string name="a11y_error">Ошибка</string>
+    <string name="a11y_empty">Пустое состояние</string>
+    <string name="a11y_tab_schedule">Вкладка расписание</string>
+    <string name="a11y_tab_bookings">Вкладка мои записи</string>
+    <string name="a11y_tab_profile">Вкладка профиль</string>
+    <string name="a11y_open_calendar">Выбрать дату рождения</string>
+
+    <!-- Debug env (Итерация 9) -->
+    <string name="debug_env_title">Debug: окружение API</string>
+    <string name="debug_env_mock">Mock API</string>
+    <string name="debug_env_restart_hint">Перезапустите приложение, чтобы применить изменения.</string>
+
+    <!-- SCR-005 Оформление записи -->
+    <string name="booking_title">Оформление записи</string>
+    <string name="booking_own_equipment">Своё снаряжение</string>
+    <string name="booking_training_price">Тренировка</string>
+    <string name="booking_rental_price">Прокат</string>
+    <string name="booking_discount">Скидка</string>
+    <string name="booking_total">Итого</string>
+    <string name="booking_rental_available">Осталось %1$d</string>
+    <string name="booking_rental_unavailable">Нет в наличии</string>
+    <string name="booking_success">Запись подтверждена</string>
+    <string name="action_confirm_booking">Подтвердить запись</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_confirm">Подтвердить</string>
+    <string name="action_ok">OK</string>
+
+    <!-- SCR-015 Согласие на риск -->
+    <string name="consent_title">Согласие на риск</string>
+    <string name="consent_text">Скалолазание связано с повышенным риском травм. Я подтверждаю, что ознакомлен(а) с правилами безопасности и добровольно принимаю на себя все риски, связанные с посещением скалодрома.</string>
+    <string name="consent_checkbox">Я подтверждаю, что ознакомлен(а) и принимаю риски</string>
+
+    <!-- SCR-006 Мои записи -->
+    <string name="title_my_bookings">Мои записи</string>
+    <string name="bookings_empty_subtitle">Запишитесь на тренировку в расписании</string>
+    <string name="payment_status_unpaid">Не оплачено</string>
+    <string name="payment_status_paid">Оплачено</string>
+    <string name="payment_status_refund">Возврат</string>
+
+    <!-- SCR-007 Детали записи -->
+    <string name="title_booking_detail">Детали записи</string>
+    <string name="label_rental">Прокат</string>
+    <string name="label_payment">Оплата</string>
+    <string name="action_cancel_booking">Отменить запись</string>
+    <string name="action_modify_rental">Изменить прокат</string>
+    <string name="edit_rental_title">Изменение проката</string>
+    <string name="action_save_rental">Сохранить изменения</string>
+    <string name="rental_updated_success">Прокат обновлён</string>
+    <string name="error_rental_modify_forbidden">Изменение проката недоступно</string>
+    <string name="cancel_forbidden_hint">Отмена запрещена менее чем за 1 час до начала</string>
+    <string name="gym_cancel_title">Тренировка отменена скалодромом</string>
+    <string name="gym_cancel_apology">Приносим извинения за неудобства. Свяжитесь с администратором для возврата средств.</string>
+
+    <!-- SCR-008 Подтверждение отмены -->
+    <string name="title_cancel_booking">Отмена записи</string>
+    <string name="action_confirm_cancel">Подтвердить отмену</string>
+    <string name="cancel_confirm_none">Вы уверены, что хотите отменить запись?</string>
+    <string name="cancel_late_warning">Внимание! Отмена за 1–2 часа до начала может повлиять на вашу репутацию. Вы уверены?</string>
+    <string name="cancel_success">Запись отменена</string>
+
+    <!-- SCR-009 Альтернативный слот -->
+    <string name="title_alternative_slot">Альтернативная тренировка</string>
+    <string name="gym_cancel_banner_title">Ваша тренировка отменена</string>
+    <string name="action_find_alternative">Подобрать другой слот</string>
+    <string name="action_book_alternative">Записаться на этот слот</string>
+    <string name="action_choose_other_slot">Выбрать другой слот</string>
+    <string name="action_later">Позже</string>
+    <string name="alternative_badge_recommended">Рекомендуем</string>
+    <string name="alternative_not_found_message">К сожалению, подходящий слот не найден. Выберите тренировку в расписании.</string>
+    <string name="alternative_book_unavailable_hint">Слот стал недоступен. Выберите другое время в расписании.</string>
+    <string name="rebooking_forbidden_hint">Повторная запись на этот слот недоступна</string>
+
+    <!-- SCR-012 Оценка инструктора (Post-MVP) -->
+    <string name="rating_title">Оценка инструктора</string>
+    <string name="rating_prompt">Оцените инструктора</string>
+    <string name="rating_action_submit">Отправить оценку</string>
+    <string name="rating_action_close">Закрыть</string>
+    <string name="rating_success">Спасибо за оценку!</string>
+    <string name="rating_unavailable_title">Оценка недоступна</string>
+    <string name="rating_gym_cancelled_message">Оценка недоступна, так как тренировка была отменена скалодромом.</string>
+    <string name="rating_expired_message">Срок оценки истёк (1–2 суток после тренировки).</string>
+    <string name="rating_already_rated">Вы уже оценили этого инструктора.</string>
+    <string name="rating_star_content_description">Оценка %1$d из 5</string>
+    <string name="bookings_rate_prompt">Оцените прошедшую тренировку</string>
+    <string name="bookings_rate_action">Оценить инструктора</string>
+</resources>

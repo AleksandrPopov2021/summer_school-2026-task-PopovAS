@@ -1,0 +1,356 @@
+{
+  "section": "6",
+  "title": "Клиентские логики (LOGIC)",
+  "version": "1.0.0",
+  "tests": [
+    {
+      "id": "LOGIC-001-T01",
+      "logic": "LOGIC-001",
+      "name": "Cold start: нет токена → config → registration",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../CheckSessionUseCaseTest.kt"
+    },
+    {
+      "id": "LOGIC-001-T02",
+      "logic": "LOGIC-001",
+      "name": "Cold start: валидный токен → GET me → main flow",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../CheckSessionUseCaseTest.kt"
+    },
+    {
+      "id": "LOGIC-001-T03",
+      "logic": "LOGIC-001",
+      "name": "401 → clear token → registration",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../CheckSessionUseCaseTest.kt"
+    },
+    {
+      "id": "LOGIC-001-T04",
+      "logic": "LOGIC-001",
+      "name": "Offline: cached config → schedule с баннером",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../CheckSessionUseCaseTest.kt"
+    },
+    {
+      "id": "LOGIC-001-T05",
+      "logic": "LOGIC-001",
+      "name": "UI: splash loading state SCR-001",
+      "layer": "ui",
+      "status": "partial",
+      "automatedTest": "client/.../MvpFlowTest.kt::waitForRegistrationOrSchedule"
+    },
+    {
+      "id": "LOGIC-002-T01",
+      "logic": "LOGIC-002",
+      "name": "Client-side validation: phone E.164, ФИО, DOB",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../RegistrationValidatorTest.kt"
+    },
+    {
+      "id": "LOGIC-002-T02",
+      "logic": "LOGIC-002",
+      "name": "POST /clients → save token",
+      "layer": "data",
+      "status": "done",
+      "automatedTest": "client/.../AuthRepositoryTest.kt"
+    },
+    {
+      "id": "LOGIC-002-T03",
+      "logic": "LOGIC-002",
+      "name": "409 CLIENT_ALREADY_EXISTS → user message",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "LOGIC-002-T04",
+      "logic": "LOGIC-002",
+      "name": "UI: SCR-002 registration form",
+      "layer": "ui",
+      "status": "partial",
+      "automatedTest": "client/.../MvpFlowTest.kt::registerNewClient"
+    },
+    {
+      "id": "LOGIC-003-T01",
+      "logic": "LOGIC-003",
+      "name": "Load schedule for date range",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "LOGIC-003-T02",
+      "logic": "LOGIC-003",
+      "name": "Cache slots locally (cached_slots)",
+      "layer": "data",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-003-T03",
+      "logic": "LOGIC-003",
+      "name": "UI: SCR-003 schedule list + date picker",
+      "layer": "ui",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-004-T01",
+      "logic": "LOGIC-004",
+      "name": "Map availability flags to UI state",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../SlotAvailabilityTest.kt"
+    },
+    {
+      "id": "LOGIC-004-T02",
+      "logic": "LOGIC-004",
+      "name": "Block book button when can_book=false",
+      "layer": "ui",
+      "status": "planned",
+      "related": ["SCR-004", "FR-007"]
+    },
+    {
+      "id": "LOGIC-005-T01",
+      "logic": "LOGIC-005",
+      "name": "Save/load booking draft",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../BookingDraftUseCaseTest.kt"
+    },
+    {
+      "id": "LOGIC-005-T02",
+      "logic": "LOGIC-005",
+      "name": "Create booking via repository",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "LOGIC-005-T03",
+      "logic": "LOGIC-005",
+      "name": "Handle 409 conflict",
+      "layer": "data",
+      "status": "done",
+      "automatedTest": "client/.../CreateBookingConflictTest.kt"
+    },
+    {
+      "id": "LOGIC-005-T04",
+      "logic": "LOGIC-005",
+      "name": "UI: SCR-005 booking confirmation",
+      "layer": "ui",
+      "status": "partial",
+      "automatedTest": "client/.../MvpFlowTest.kt::confirmBooking"
+    },
+    {
+      "id": "LOGIC-006-T01",
+      "logic": "LOGIC-006",
+      "name": "Redirect to consent if risk_consent false",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "LOGIC-006-T02",
+      "logic": "LOGIC-006",
+      "name": "PATCH me with risk_consent_accepted",
+      "layer": "unit",
+      "status": "partial",
+      "automatedTest": "client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "LOGIC-006-T03",
+      "logic": "LOGIC-006",
+      "name": "UI: SCR-015 consent screen",
+      "layer": "ui",
+      "status": "partial",
+      "automatedTest": "client/.../MvpFlowTest.kt::handleConsentIfNeeded"
+    },
+    {
+      "id": "LOGIC-007-T01",
+      "logic": "LOGIC-007",
+      "name": "Calculate price: training + rental − loyalty",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../CalculateBookingPriceUseCaseTest.kt"
+    },
+    {
+      "id": "LOGIC-007-T02",
+      "logic": "LOGIC-007",
+      "name": "Rental selection diff (own + rental combo)",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../RentalSelectionDiffTest.kt"
+    },
+    {
+      "id": "LOGIC-007-T03",
+      "logic": "LOGIC-007",
+      "name": "Fetch rental availability for slot",
+      "layer": "data",
+      "status": "partial",
+      "automatedTest": "client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "LOGIC-007-T04",
+      "logic": "LOGIC-007",
+      "name": "UI: rental picker on SCR-005",
+      "layer": "ui",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-008-T01",
+      "logic": "LOGIC-008",
+      "name": "Map cancellation_policy to UI (none / late / forbidden)",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../BookingCancellationTest.kt; CancelBookingForbiddenTest.kt"
+    },
+    {
+      "id": "LOGIC-008-T02",
+      "logic": "LOGIC-008",
+      "name": "Execute cancel booking",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "LOGIC-008-T03",
+      "logic": "LOGIC-008",
+      "name": "UI: SCR-008 cancellation confirmation",
+      "layer": "ui",
+      "status": "partial",
+      "automatedTest": "client/.../MvpFlowTest.kt (confirm cancel)"
+    },
+    {
+      "id": "LOGIC-009-T01",
+      "logic": "LOGIC-009",
+      "name": "Find alternative slot — found",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../AlternativeSlotLogicTest.kt"
+    },
+    {
+      "id": "LOGIC-009-T02",
+      "logic": "LOGIC-009",
+      "name": "Find alternative slot — not found",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../AlternativeSlotLogicTest.kt"
+    },
+    {
+      "id": "LOGIC-009-T03",
+      "logic": "LOGIC-009",
+      "name": "UI: SCR-009 alternative offer screen",
+      "layer": "ui",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-010-T01",
+      "logic": "LOGIC-010",
+      "name": "Update rental lines via API",
+      "layer": "data",
+      "status": "done",
+      "automatedTest": "client/.../UpdateBookingRentalIntegrationTest.kt"
+    },
+    {
+      "id": "LOGIC-010-T02",
+      "logic": "LOGIC-010",
+      "name": "Handle RENTAL_UNAVAILABLE error",
+      "layer": "unit",
+      "status": "partial",
+      "automatedTest": "client/.../MvpUseCasesTest.kt"
+    },
+    {
+      "id": "LOGIC-010-T03",
+      "logic": "LOGIC-010",
+      "name": "UI: edit rental on SCR-007",
+      "layer": "ui",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-011-T01",
+      "logic": "LOGIC-011",
+      "name": "Load notification preferences",
+      "layer": "unit",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-011-T02",
+      "logic": "LOGIC-011",
+      "name": "Update only disableable toggles",
+      "layer": "unit",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-011-T03",
+      "logic": "LOGIC-011",
+      "name": "UI: SCR-011 notification settings",
+      "layer": "ui",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-012-T01",
+      "logic": "LOGIC-012",
+      "name": "Register push token on session start",
+      "layer": "unit",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-012-T02",
+      "logic": "LOGIC-012",
+      "name": "PUT /devices/push-token integration",
+      "layer": "data",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-013-T01",
+      "logic": "LOGIC-013",
+      "name": "Parse push payload → route to screen",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../PushRoutingTest.kt"
+    },
+    {
+      "id": "LOGIC-013-T02",
+      "logic": "LOGIC-013",
+      "name": "Deep link: booking / slot / rating",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../PushRoutingTest.kt"
+    },
+    {
+      "id": "LOGIC-013-T03",
+      "logic": "LOGIC-013",
+      "name": "UI: SCR-014 push notification view",
+      "layer": "ui",
+      "status": "planned"
+    },
+    {
+      "id": "LOGIC-014-T01",
+      "logic": "LOGIC-014",
+      "name": "Validate rating window and stars",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../RatingLogicTest.kt"
+    },
+    {
+      "id": "LOGIC-014-T02",
+      "logic": "LOGIC-014",
+      "name": "Block rating for gym-cancelled booking",
+      "layer": "unit",
+      "status": "done",
+      "automatedTest": "client/.../RatingLogicTest.kt"
+    },
+    {
+      "id": "LOGIC-014-T03",
+      "logic": "LOGIC-014",
+      "name": "UI: SCR-012 rating screen",
+      "layer": "ui",
+      "status": "out_of_scope",
+      "notes": "Post-MVP"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: vertical
+      POSTGRES_PASSWORD: vertical
+      POSTGRES_DB: vertical
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_staging_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vertical -d vertical"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
+    image: golang:1-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      DATABASE_URL: postgres://vertical:vertical@postgres:5432/vertical?sslmode=disable
+      GOTOOLCHAIN: auto
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >
+      sh -c "go run github.com/pressly/goose/v3/cmd/goose@latest
+      -dir migrations postgres \"$$DATABASE_URL\" up && go run ./cmd/seed"
+
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      HTTP_HOST: 0.0.0.0
+      HTTP_PORT: 8080
+      DATABASE_URL: postgres://vertical:vertical@postgres:5432/vertical?sslmode=disable
+      JWT_SECRET: staging-change-me
+      INTERNAL_API_KEY: staging-internal-key
+      PUSH_SENDER: logging
+      CORS_ALLOWED_ORIGINS: "*"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  worker:
+    build: .
+    command: ["worker"]
+    environment:
+      DATABASE_URL: postgres://vertical:vertical@postgres:5432/vertical?sslmode=disable
+      PUSH_SENDER: logging
+      WORKER_INTERVAL: 1m
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  postgres_staging_data:
